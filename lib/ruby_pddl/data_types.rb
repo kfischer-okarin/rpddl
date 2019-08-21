@@ -4,7 +4,7 @@ require 'dry-types'
 
 module RubyPddl
   # Types for argument validations
-  module Types
+  module DataTypes
     # Base Types from dry-types
     module Base
       include Dry.Types()
