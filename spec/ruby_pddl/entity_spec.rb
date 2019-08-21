@@ -3,9 +3,9 @@
 require_relative '../spec_helper'
 
 module RubyPddl
-  RSpec.describe Domain do
+  RSpec.describe Entity do
     describe '#name' do
-      subject { Domain.new(name) }
+      subject { Entity.new(name) }
 
       it_behaves_like 'a named object'
     end
