@@ -8,7 +8,7 @@ module RubyPddl
   # Planning Domain
   class Domain
     include Dry::Initializer.define -> do
-      param :name, type: Types::String
+      param :name, type: Types::Name
     end
   end
 end
