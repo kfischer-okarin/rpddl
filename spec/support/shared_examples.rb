@@ -1,19 +1,47 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'a named object' do
-  context 'with a valid name' do
-    let(:name) { 'valid-object' }
+module RubyPddl
+  RSpec.shared_examples 'a named object' do
+    context 'with a valid name' do
+      let(:name) { 'valid-object' }
 
-    it 'has the specified name' do
-      expect(subject).to have_attributes(name: name)
+      it 'has the specified name' do
+        expect(subject).to have_attributes(name: name)
+      end
+    end
+
+    context 'with a invalid name' do
+      let(:name) { 'invalidName$$$' }
+
+      it 'throws an error' do
+        expect { subject }.to raise_error Dry::Types::ConstraintError
+      end
     end
   end
 
-  context 'with a valid name' do
-    let(:name) { 'invalidName$$$' }
+  RSpec.shared_examples 'a object containing variables' do
+    context 'with one variable' do
+      let(:variables) { [Variable.new('a')] }
 
-    it 'throws an error' do
-      expect { subject }.to raise_error Dry::Types::ConstraintError
+      it 'has the specified variables' do
+        expect(subject).to have_attributes(variables: variables)
+      end
+    end
+
+    context 'with several variable' do
+      let(:variables) { [Variable.new('a'), Variable.new('b')] }
+
+      it 'has the specified variables' do
+        expect(subject).to have_attributes(variables: variables)
+      end
+    end
+
+    context 'with a non-variable' do
+      let(:variables) { 'not-a-variable' }
+
+      it 'throws an error' do
+        expect { subject }.to raise_error Dry::Types::ConstraintError
+      end
     end
   end
 end
