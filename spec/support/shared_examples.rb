@@ -14,7 +14,7 @@ module RubyPddl
       let(:name) { 'invalidName$$$' }
 
       it 'throws an error' do
-        expect { subject }.to raise_error Dry::Types::ConstraintError
+        expect { subject }.to raise_error Dry::Types::CoercionError
       end
     end
   end
@@ -24,7 +24,7 @@ module RubyPddl
       let(:variables) { [Variable.new('a')] }
 
       it 'has the specified variables' do
-        expect(subject).to have_attributes(variables: variables)
+        expect(subject.variables).to contain_exactly(*variables)
       end
     end
 
@@ -32,7 +32,7 @@ module RubyPddl
       let(:variables) { [Variable.new('a'), Variable.new('b')] }
 
       it 'has the specified variables' do
-        expect(subject).to have_attributes(variables: variables)
+        expect(subject.variables).to contain_exactly(*variables)
       end
     end
 
@@ -40,7 +40,7 @@ module RubyPddl
       let(:variables) { 'not-a-variable' }
 
       it 'throws an error' do
-        expect { subject }.to raise_error Dry::Types::ConstraintError
+        expect { subject }.to raise_error Dry::Types::CoercionError
       end
     end
   end

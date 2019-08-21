@@ -2,15 +2,13 @@
 
 require 'dry-types'
 
+require 'ruby_pddl/data_types/base'
+require 'ruby_pddl/data_structures'
+
 # rubocop:disable Naming/MethodName
 module RubyPddl
   # Types for argument validations
   module DataTypes
-    # Base Types from dry-types
-    module Base
-      include Dry.Types()
-    end
-
     Name = Base::String
            .constrained(format: /^[a-z][a-z\d\-_]*$/)
            .constructor(&:to_s)
@@ -18,7 +16,8 @@ module RubyPddl
     module_function
 
     def ListOf(type)
-      Base::Array.of(Base::Instance(type))
+      Base::Instance(NamedList)
+          .constructor(->(elements) { NamedList.new(type).concat(elements) })
     end
   end
 end
