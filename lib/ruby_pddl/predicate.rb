@@ -2,7 +2,6 @@
 
 require 'dry-initializer'
 
-require 'ruby_pddl/data_structures'
 require 'ruby_pddl/data_types'
 require 'ruby_pddl/variable'
 
