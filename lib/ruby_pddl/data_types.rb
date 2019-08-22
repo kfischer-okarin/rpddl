@@ -17,7 +17,7 @@ module RubyPddl
 
     def ListOf(type)
       Base::Instance(NamedList)
-          .constructor(->(elements) { NamedList.new(type).concat(elements) })
+          .constructor(->(elements) { NamedList.new(type, elements) })
     end
   end
 end
