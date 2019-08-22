@@ -5,6 +5,7 @@ require 'dry-types'
 require 'ruby_pddl/data_types/base'
 
 module RubyPddl
+  # Typed collection of named elements
   class NamedList
     include Enumerable
 
@@ -18,11 +19,7 @@ module RubyPddl
     end
 
     def each
-      elements.values.each
-    end
-
-    def to_a
-      elements.values.to_a
+      elements.values.each { |el| yield el }
     end
 
     private
@@ -34,7 +31,6 @@ module RubyPddl
       raise "Element named '#{added.name}' already contained" if elements.key? added.name
 
       elements[added.name] = added
-      self
     end
 
     def elements
