@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+require 'dry-initializer'
+
+require 'ruby_pddl/data_types'
+require 'ruby_pddl/variable'
+
+module RubyPddl
+  module Action
+    # STRIPS-style action
+    class Strips
+      include Dry::Initializer.define -> do
+        param :name, type: DataTypes::Name
+        option :parameters, type: DataTypes::ListOf(Variable), default: -> { [] }
+      end
+    end
+  end
+end

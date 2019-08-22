@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'ruby_pddl/action'
 require 'ruby_pddl/domain'
 require 'ruby_pddl/entity'
 require 'ruby_pddl/predicate'

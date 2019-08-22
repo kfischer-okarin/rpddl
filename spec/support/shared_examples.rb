@@ -19,12 +19,12 @@ module RubyPddl
     end
   end
 
-  RSpec.shared_examples 'a object containing variables' do
+  RSpec.shared_examples 'a object containing variables' do |attribute = :variables|
     context 'with one variable' do
       let(:variables) { [Variable.new('a')] }
 
       it 'has the specified variables' do
-        expect(subject.variables).to contain_exactly(*variables)
+        expect(subject.send(attribute)).to contain_exactly(*variables)
       end
     end
 
@@ -32,7 +32,7 @@ module RubyPddl
       let(:variables) { [Variable.new('a'), Variable.new('b')] }
 
       it 'has the specified variables' do
-        expect(subject.variables).to contain_exactly(*variables)
+        expect(subject.send(attribute)).to contain_exactly(*variables)
       end
     end
 
