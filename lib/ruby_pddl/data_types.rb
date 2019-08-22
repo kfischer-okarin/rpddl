@@ -15,9 +15,13 @@ module RubyPddl
 
     module_function
 
+    def InstanceOf(type)
+      Base::Instance(type)
+    end
+
     def ListOf(type)
-      Base::Instance(NamedList)
-          .constructor(->(elements) { NamedList.new(type, elements) })
+      InstanceOf(NamedList)
+        .constructor(->(elements) { NamedList.new(type, elements) })
     end
   end
 end

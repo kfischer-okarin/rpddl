@@ -3,6 +3,7 @@
 require 'dry-initializer'
 
 require 'ruby_pddl/data_types'
+require 'ruby_pddl/data_types/variable_list'
 require 'ruby_pddl/variable'
 
 module RubyPddl
@@ -11,7 +12,7 @@ module RubyPddl
     class Strips
       include Dry::Initializer.define -> do
         param :name, type: DataTypes::Name
-        option :parameters, type: DataTypes::ListOf(Variable), default: -> { [] }
+        option :parameters, type: DataTypes::VariableList, default: -> { [] }
       end
     end
   end
