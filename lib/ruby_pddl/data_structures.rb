@@ -9,7 +9,7 @@ module RubyPddl
     include Enumerable
 
     def initialize(type, elements)
-      @type = type
+      @type = DataTypes::Base.Instance(type)
       elements.each { |el| add el }
     end
 
@@ -27,7 +27,10 @@ module RubyPddl
 
     private
 
+    attr_accessor :type
+
     def add(added)
+      type[added]
       raise "Element named '#{added.name}' already contained" if elements.key? added.name
 
       elements[added.name] = added

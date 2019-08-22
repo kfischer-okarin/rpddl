@@ -37,7 +37,7 @@ module RubyPddl
     end
 
     context 'with a non-variable' do
-      let(:variables) { 'not-a-variable' }
+      let(:variables) { ['not-a-variable'] }
 
       it 'throws an error' do
         expect { subject }.to raise_error Dry::Types::CoercionError
