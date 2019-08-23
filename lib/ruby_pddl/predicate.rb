@@ -12,5 +12,10 @@ module RubyPddl
       param :name, type: DataTypes::Name
       option :variables, type: DataTypes::VariableList, default: -> { [] }
     end
+
+    # TODO: Remove once dry-initializer fixes check of unknown positional elements
+    def initialize(name, **options)
+      super name, **options
+    end
   end
 end
