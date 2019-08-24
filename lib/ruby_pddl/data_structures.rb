@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'forwardable'
+
 require 'dry-types'
 
 require 'ruby_pddl/data_types/base'
@@ -7,6 +9,7 @@ require 'ruby_pddl/data_types/base'
 module RubyPddl
   # Typed collection of named elements
   class NamedList
+    extend Forwardable
     include Enumerable
 
     def initialize(type, elements)
@@ -17,6 +20,8 @@ module RubyPddl
     include Dry::Initializer.define -> do
       param :type, type: DataTypes::Base::Instance(Class)
     end
+
+    def_delegators :elements, :keys, :key?, :[]
 
     def each
       elements.values.each { |el| yield el }

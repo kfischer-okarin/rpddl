@@ -2,6 +2,7 @@
 
 require 'dry-initializer'
 
+require 'ruby_pddl/atomic_formula'
 require 'ruby_pddl/data_types'
 require 'ruby_pddl/data_types/variable_list'
 require 'ruby_pddl/variable'
