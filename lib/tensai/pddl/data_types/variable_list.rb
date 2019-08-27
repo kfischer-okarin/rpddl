@@ -2,10 +2,10 @@
 
 require 'dry-types'
 
-require 'ruby_pddl/data_types'
-require 'ruby_pddl/variable'
+require 'tensai/pddl/data_types'
+require 'tensai/pddl/variable'
 
-module RubyPddl
+module Tensai::Pddl
   module DataTypes
     VariableList = ListOf(Variable)
   end

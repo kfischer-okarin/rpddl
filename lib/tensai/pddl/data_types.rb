@@ -2,11 +2,11 @@
 
 require 'dry-types'
 
-require 'ruby_pddl/data_types/base'
-require 'ruby_pddl/data_structures'
+require 'tensai/pddl/data_types/base'
+require 'tensai/pddl/data_structures'
 
 # rubocop:disable Naming/MethodName
-module RubyPddl
+module Tensai::Pddl
   # Types for argument validations
   module DataTypes
     Name = Base::String

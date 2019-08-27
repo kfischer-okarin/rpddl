@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-module RubyPddl
+module Tensai::Pddl
   RSpec.describe Entity do
     describe '#name' do
       subject { Entity.new(name) }

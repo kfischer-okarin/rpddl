@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'ruby_pddl'
+require 'tensai/pddl'
 
 Dir[File.expand_path('support/**/*.rb', __dir__)].each { |f| require f }
 

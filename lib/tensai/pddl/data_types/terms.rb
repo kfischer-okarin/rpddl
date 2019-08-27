@@ -2,10 +2,10 @@
 
 require 'dry-types'
 
-require 'ruby_pddl/entity'
-require 'ruby_pddl/variable'
+require 'tensai/pddl/entity'
+require 'tensai/pddl/variable'
 
-module RubyPddl
+module Tensai::Pddl
   module DataTypes
     Term = Base::Instance(Entity) | Base::Instance(Variable)
     Terms = Base::Hash.map(Name, Term)

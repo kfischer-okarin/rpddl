@@ -2,7 +2,7 @@
 
 require 'dry-types'
 
-module RubyPddl
+module Tensai::Pddl
   # Types for argument validations
   module DataTypes
     # Base Types from dry-types

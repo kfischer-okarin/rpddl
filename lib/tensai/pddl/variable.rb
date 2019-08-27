@@ -2,11 +2,11 @@
 
 require 'dry-initializer'
 
-require 'ruby_pddl/data_types'
+require 'tensai/pddl/data_types'
 
-module RubyPddl
-  # Planning Domain
-  class Domain
+module Tensai::Pddl
+  # Variable in a atomic formula skeleton
+  class Variable
     include Dry::Initializer.define -> do
       param :name, type: DataTypes::Name
     end

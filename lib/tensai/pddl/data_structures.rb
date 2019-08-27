@@ -4,9 +4,9 @@ require 'forwardable'
 
 require 'dry-types'
 
-require 'ruby_pddl/data_types/base'
+require 'tensai/pddl/data_types/base'
 
-module RubyPddl
+module Tensai::Pddl
   # Typed collection of named elements
   class NamedList
     extend Forwardable

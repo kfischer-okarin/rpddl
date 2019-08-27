@@ -2,11 +2,11 @@
 
 require 'dry-initializer'
 
-require 'ruby_pddl/data_types'
+require 'tensai/pddl/data_types'
 
-module RubyPddl
-  # Entity in the planning domain (PDDL constant/object)
-  class Entity
+module Tensai::Pddl
+  # Planning Domain
+  class Domain
     include Dry::Initializer.define -> do
       param :name, type: DataTypes::Name
     end

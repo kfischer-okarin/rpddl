@@ -14,3 +14,6 @@ Style/BlockDelimiters:
 
 Layout/MultilineArrayLineBreaks:
   Enabled: True
+
+Style/ClassAndModuleChildren:
+  Enabled: False

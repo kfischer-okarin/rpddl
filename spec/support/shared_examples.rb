@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module RubyPddl
+module Tensai::Pddl
   RSpec.shared_examples 'a named object' do
     context 'with a valid name' do
       let(:name) { 'valid-object' }

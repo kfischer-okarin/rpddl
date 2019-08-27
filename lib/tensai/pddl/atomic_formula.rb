@@ -3,11 +3,11 @@
 require 'set'
 require 'dry-initializer'
 
-require 'ruby_pddl/data_types'
-require 'ruby_pddl/data_types/terms'
-require 'ruby_pddl/predicate'
+require 'tensai/pddl/data_types'
+require 'tensai/pddl/data_types/terms'
+require 'tensai/pddl/predicate'
 
-module RubyPddl
+module Tensai::Pddl
   # Atomic formula in a planning domain
   class AtomicFormula
     include Dry::Initializer.define -> do

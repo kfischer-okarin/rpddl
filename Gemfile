@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in ruby_pddl.gemspec
+# Specify your gem's dependencies in tensai-pddl.gemspec
 gemspec
 
 group :development do

@@ -2,10 +2,10 @@
 
 require 'dry-initializer'
 
-require 'ruby_pddl/data_types'
-require 'ruby_pddl/data_types/variable_list'
+require 'tensai/pddl/data_types'
+require 'tensai/pddl/data_types/variable_list'
 
-module RubyPddl
+module Tensai::Pddl
   # Predicate in a planning domain
   class Predicate
     include Dry::Initializer.define -> do

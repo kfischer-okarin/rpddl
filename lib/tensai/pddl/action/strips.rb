@@ -2,12 +2,12 @@
 
 require 'dry-initializer'
 
-require 'ruby_pddl/atomic_formula'
-require 'ruby_pddl/data_types'
-require 'ruby_pddl/data_types/variable_list'
-require 'ruby_pddl/variable'
+require 'tensai/pddl/atomic_formula'
+require 'tensai/pddl/data_types'
+require 'tensai/pddl/data_types/variable_list'
+require 'tensai/pddl/variable'
 
-module RubyPddl
+module Tensai::Pddl
   module Action
     # STRIPS-style action
     class Strips
