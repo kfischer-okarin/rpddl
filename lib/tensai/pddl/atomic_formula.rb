@@ -17,13 +17,24 @@ module Tensai::Pddl
 
     def initialize(predicate, terms)
       super predicate, terms
-
-      raise ArgumentError, 'Unknown Terms' if terms.keys.any? { |k| !predicate.variables.key?(k) }
-
-      predicate.variables.each do |var|
-        self.terms[var.name] = var unless terms.key? var.name
-      end
       self.terms.freeze
+
+      check_for_unknown_terms
+      check_for_missing_terms
+    end
+
+    private
+
+    def check_for_unknown_terms
+      unknown_terms = terms.keys.reject { |k| predicate.variables.key?(k) }
+
+      raise ArgumentError, "Unknown Terms: #{unknown_terms}" if unknown_terms.any?
+    end
+
+    def check_for_missing_terms
+      missing_terms = predicate.variables.keys.reject { |k| terms.key?(k) }
+
+      raise ArgumentError, "Missing Terms: #{missing_terms}" if missing_terms.any?
     end
   end
 end

@@ -25,16 +25,8 @@ module Tensai::Pddl
         end
       end
 
-      context 'Assigning just partially' do
-        let(:terms) { { 'a' => Entity.new('dock1') } }
-
-        it 'keeps the original variables where unassigned' do
-          expected_terms = { 'b' => predicate.variables['b'] }.merge(terms)
-          expect(subject).to have_attributes terms: expected_terms
-        end
-      end
-
       INVALID_TERMS = [
+        { 'a' => Entity.new('dock1') },
         { 'c' => Variable.new('left') }
       ].freeze
 
