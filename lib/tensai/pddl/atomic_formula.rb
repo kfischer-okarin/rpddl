@@ -25,9 +25,5 @@ module Tensai::Pddl
       end
       self.terms.freeze
     end
-
-    def bind(values)
-      AtomicFormula.new(predicate, terms.merge(values))
-    end
   end
 end

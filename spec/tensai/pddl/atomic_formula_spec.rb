@@ -48,48 +48,5 @@ module Tensai::Pddl
         end
       end
     end
-
-    describe '#bind' do
-      subject { formula.bind(values) }
-
-      let(:formula) { AtomicFormula.new(predicate, terms) }
-      let(:predicate) { Predicate.new('adjacent', variables: [Variable.new('a'), Variable.new('b')]) }
-      let(:terms) { { 'a' => Variable.new('x'), 'b' => Entity.new('one') } }
-
-      shared_examples 'creates a new formula with the bound value' do
-        it 'creates a new formula' do
-          expect(subject).to be_a AtomicFormula
-          expect(subject).not_to be formula
-        end
-
-        it 'does not change the original formula' do
-          expect { subject }.not_to(change { formula.terms.to_a })
-        end
-
-        it 'bind the specified variable' do
-          expect(subject.terms).to eq('a' => values['a'], 'b' => terms['b'])
-        end
-      end
-
-      context 'binding a variable to an Entity' do
-        let(:values) { { 'a' => Entity.new('two') } }
-
-        include_examples 'creates a new formula with the bound value'
-      end
-
-      context 'binding a variable to another Variable' do
-        let(:values) { { 'a' => Variable.new('z') } }
-
-        include_examples 'creates a new formula with the bound value'
-      end
-
-      context 'binding a variable to an invalid value' do
-        let(:values) { { 'a' => 11 } }
-
-        it 'raises an error' do
-          expect { subject }.to raise_error Dry::Types::CoercionError
-        end
-      end
-    end
   end
 end
