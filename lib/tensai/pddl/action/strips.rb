@@ -2,7 +2,7 @@
 
 require 'dry-initializer'
 
-require 'tensai/pddl/atomic_formula'
+require 'tensai/pddl/formula'
 require 'tensai/pddl/data_types'
 require 'tensai/pddl/data_types/variable_list'
 require 'tensai/pddl/variable'

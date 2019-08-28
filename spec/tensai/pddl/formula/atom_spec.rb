@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
 module Tensai::Pddl
-  RSpec.describe AtomicFormula do
+  RSpec.describe Formula::Atom do
     describe 'Validation' do
-      subject { AtomicFormula.new(predicate, terms) }
+      subject { Formula::Atom.new(predicate, terms) }
 
       let(:predicate) { Predicate.new('adjacent', variables: [Variable.new('a'), Variable.new('b')]) }
 
