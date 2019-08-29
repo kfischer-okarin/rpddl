@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'set'
 require 'dry-initializer'
 
 require 'tensai/pddl/data_types'
 require 'tensai/pddl/data_types/terms'
+require 'tensai/pddl/formula/core'
 require 'tensai/pddl/predicate'
 
 module Tensai::Pddl
   module Formula
     # Atomic formula in a planning domain
-    class Atom
+    class Atom < Formula
       include Dry::Initializer.define -> do
         param :predicate, type: DataTypes::InstanceOf(Predicate)
         param :terms, type: DataTypes::Terms
