@@ -7,7 +7,7 @@ require 'tensai/pddl/variable'
 
 module Tensai::Pddl
   module DataTypes
-    Term = Base::Instance(Entity) | Base::Instance(Variable)
+    Term = InstanceOf(Entity) | InstanceOf(Variable)
     Terms = Base::Hash.map(Name, Term)
   end
 end
