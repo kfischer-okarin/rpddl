@@ -3,6 +3,18 @@
 module Tensai::Pddl
   module Formula
     # Formula
-    class Formula; end
+    class Formula
+      def and(other)
+        And.new([self, other])
+      end
+
+      def not
+        Negated.new self
+      end
+
+      private
+
+      def initialize; end
+    end
   end
 end
