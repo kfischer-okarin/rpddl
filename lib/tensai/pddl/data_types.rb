@@ -19,7 +19,7 @@ module Tensai::Pddl
       Base::Instance(type)
     end
 
-    def ListOf(type)
+    def NamedListOf(type)
       InstanceOf(NamedList)
         .constructor(->(elements) { NamedList.new(type, elements) })
     end

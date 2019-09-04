@@ -7,6 +7,6 @@ require 'tensai/pddl/variable'
 
 module Tensai::Pddl
   module DataTypes
-    VariableList = ListOf(Variable)
+    VariableList = NamedListOf(Variable)
   end
 end
