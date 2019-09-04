@@ -16,7 +16,13 @@ module Tensai::Pddl
     module_function
 
     def InstanceOf(type)
-      Base::Instance(type)
+      Base::Instance(type).constructor(->(instance) {
+        if block_given?
+          Base::Instance(type)[instance]
+          yield instance
+        end
+        instance
+      })
     end
 
     def NamedListOf(type)
