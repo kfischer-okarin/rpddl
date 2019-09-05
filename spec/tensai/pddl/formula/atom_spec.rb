@@ -4,41 +4,26 @@ require_relative '../../../spec_helper'
 
 module Tensai::Pddl
   RSpec.describe Formula::Atom do
-    describe 'Validation' do
-      subject { Formula::Atom.new(predicate, terms) }
-
+    describe '#terms' do
       let(:predicate) { Predicate.new('adjacent', variables: [Variable.new('a'), Variable.new('b')]) }
 
-      VALID_TERMS = [
-        { 'a' => Entity.new('dock1'), 'b' => Entity.new('dock2') },
-        { 'a' => Variable.new('left'), 'b' => Variable.new('right') },
-        { 'a' => Entity.new('robot_a'), 'b' => Variable.new('neighbor') }
-      ].freeze
-
-      VALID_TERMS.each do |terms|
-        context "Assigning #{terms}" do
-          let(:terms) { terms }
-
-          it 'can be assigned' do
-            expect(subject).to have_attributes terms: terms
-          end
+      shared_examples 'it accepts' do |terms|
+        it "accepts #{terms}" do
+          expect { Formula::Atom.new(predicate, terms) }.not_to raise_error
         end
       end
 
-      INVALID_TERMS = [
-        { 'a' => Entity.new('dock1') },
-        { 'c' => Variable.new('left') }
-      ].freeze
-
-      INVALID_TERMS.each do |terms|
-        context "Assigning #{terms}" do
-          let(:terms) { terms }
-
-          it 'cannot be assigned' do
-            expect { subject }.to raise_error ArgumentError
-          end
+      shared_examples 'it does not accept' do |terms|
+        it "does not accept #{terms}" do
+          expect { Formula::Atom.new(predicate, terms) }.to raise_error ArgumentError
         end
       end
+
+      include_examples 'it accepts', 'a' => Entity.new('dock1'), 'b' => Entity.new('dock2')
+      include_examples 'it accepts', 'a' => Variable.new('left'), 'b' => Variable.new('right')
+      include_examples 'it accepts', 'a' => Entity.new('robot_a'), 'b' => Variable.new('neighbor')
+      include_examples 'it does not accept', 'a' => Entity.new('dock1')
+      include_examples 'it does not accept', 'c' => Variable.new('left')
     end
   end
 end
