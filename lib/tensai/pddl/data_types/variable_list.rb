@@ -10,11 +10,8 @@ module Tensai::Pddl
   module DataTypes
     VariableList = InstanceOf(NamedList)
                    .constructor(->(array) {
-                     FilledVariableArray[array]
+                     FilledArrayOf(Variable)[array]
                      NamedList.new(Variable, array)
                    })
-
-    FilledVariableArray = Base::Array.of(InstanceOf(Variable))
-                                     .constrained(filled: true)
   end
 end

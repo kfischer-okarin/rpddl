@@ -5,7 +5,9 @@ module Tensai::Pddl
     # Formula
     class Formula
       def and(other)
-        And.new([self, other])
+        return other.and self if other.is_a? And
+
+        And.new(self, other)
       end
 
       def not

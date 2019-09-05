@@ -24,6 +24,11 @@ module Tensai::Pddl
         instance
       })
     end
+
+    def FilledArrayOf(type)
+      Base::Array.of(InstanceOf(type))
+                 .constrained(filled: true)
+    end
   end
 end
 # rubocop:enable Naming/MethodName

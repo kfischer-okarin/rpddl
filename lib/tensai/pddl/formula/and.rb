@@ -9,11 +9,15 @@ module Tensai::Pddl
     # Conjunction
     class And < Formula
       include Dry::Initializer.define -> do
-        param :formulas, type: DataTypes::Base::Array.of(DataTypes::InstanceOf(Formula))
+        param :formulas, type: DataTypes::FilledArrayOf(Formula)
+      end
+
+      def initialize(*formulas)
+        super(formulas)
       end
 
       def and(other)
-        And.new([*formulas, other])
+        And.new(*formulas, other)
       end
     end
   end
