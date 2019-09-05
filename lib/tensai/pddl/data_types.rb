@@ -24,11 +24,6 @@ module Tensai::Pddl
         instance
       })
     end
-
-    def NamedListOf(type)
-      InstanceOf(NamedList)
-        .constructor(->(elements) { NamedList.new(type, elements) })
-    end
   end
 end
 # rubocop:enable Naming/MethodName

@@ -5,7 +5,7 @@ require_relative '../../spec_helper'
 module Tensai::Pddl
   RSpec.describe Predicate do
     describe '#name' do
-      subject { Predicate.new(name) }
+      subject { Predicate.new(name, variables: [Variable.new('a')]) }
 
       it_behaves_like 'a named object'
     end

@@ -14,7 +14,7 @@ module Tensai::Pddl
     class Strips
       include Dry::Initializer.define -> do
         param :name, type: DataTypes::Name
-        option :parameters, type: DataTypes::VariableList, default: -> { [] }
+        option :parameters, type: DataTypes::VariableList
         option :precondition, type: DataTypes::InstanceOf(Formula::Formula), optional: true
       end
 

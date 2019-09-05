@@ -10,12 +10,7 @@ module Tensai::Pddl
   class Predicate
     include Dry::Initializer.define -> do
       param :name, type: DataTypes::Name
-      option :variables, type: DataTypes::VariableList, default: -> { [] }
-    end
-
-    # TODO: Remove once dry-initializer fixes check of unknown positional elements
-    def initialize(name, **options)
-      super name, **options
+      option :variables, type: DataTypes::VariableList
     end
   end
 end
