@@ -19,10 +19,10 @@ module Tensai::Pddl
     describe '::VariableList' do
       subject { DataTypes::VariableList }
 
-      include_examples 'it accepts', [Variable.new('a')]
-      include_examples 'it accepts', [Variable.new('a'), Variable.new('b')]
+      include_examples 'it accepts', FactoryBot.build_list(:variable, 1)
+      include_examples 'it accepts', FactoryBot.build_list(:variable, 2)
       include_examples 'it does not accept', []
-      include_examples 'it does not accept', Variable.new('a')
+      include_examples 'it does not accept', FactoryBot.build(:variable)
     end
   end
 end

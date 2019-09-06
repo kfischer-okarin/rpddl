@@ -6,7 +6,7 @@ module Tensai::Pddl
   module Action
     RSpec.describe Strips do
       describe '#name' do
-        subject { Strips.new(name, parameters: [Variable.new('a')]) }
+        subject { Strips.new(name, parameters: build_list(:variable, 1)) }
 
         it_behaves_like 'a named object'
       end
@@ -20,13 +20,9 @@ module Tensai::Pddl
       describe '#precondition' do
         subject { Strips.new('action', parameters: [Variable.new('b')], precondition: precondition) }
 
-        def self.atom
-          Formula::Atom.new(Predicate.new('a', variables: [Variable.new('b')]), { b: Entity.new('bob') })
-        end
-
         VALID_PRECONDITIONS = [
-          atom,
-          atom.and(atom)
+          FactoryBot.build(:atom),
+          FactoryBot.build(:atom).and(FactoryBot.build(:atom))
         ].freeze
 
         VALID_PRECONDITIONS.each do |precondition|
@@ -40,8 +36,8 @@ module Tensai::Pddl
         end
 
         INVALID_PRECONDITIONS = [
-          atom.not,
-          atom.and(atom.not)
+          FactoryBot.build(:atom).not,
+          FactoryBot.build(:atom).and(FactoryBot.build(:atom).not)
         ].freeze
 
         INVALID_PRECONDITIONS.each do |precondition|

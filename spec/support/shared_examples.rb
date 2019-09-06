@@ -21,7 +21,7 @@ module Tensai::Pddl
 
   RSpec.shared_examples 'a object containing variables' do |attribute = :variables|
     context 'with one variable' do
-      let(:variables) { [Variable.new('a')] }
+      let(:variables) { build_list(:variable, 1) }
 
       it 'has the specified variables' do
         expect(subject.send(attribute)).to contain_exactly(*variables)
@@ -29,7 +29,7 @@ module Tensai::Pddl
     end
 
     context 'with several variable' do
-      let(:variables) { [Variable.new('a'), Variable.new('b')] }
+      let(:variables) { build_list(:variable, 2) }
 
       it 'has the specified variables' do
         expect(subject.send(attribute)).to contain_exactly(*variables)

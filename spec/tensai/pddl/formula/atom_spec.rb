@@ -5,17 +5,17 @@ require_relative '../../../spec_helper'
 module Tensai::Pddl
   RSpec.describe Formula::Atom do
     describe '#terms' do
-      let(:predicate) { Predicate.new('adjacent', variables: [Variable.new('a'), Variable.new('b')]) }
+      let(:predicate) { build(:predicate, variables: [Variable.new('a'), Variable.new('b')]) }
 
       shared_examples 'it accepts' do |terms|
         it "accepts #{terms}" do
-          expect { Formula::Atom.new(predicate, terms) }.not_to raise_error
+          expect { build(:atom, predicate: predicate, terms: terms) }.not_to raise_error
         end
       end
 
       shared_examples 'it does not accept' do |terms|
         it "does not accept #{terms}" do
-          expect { Formula::Atom.new(predicate, terms) }.to raise_error ArgumentError
+          expect { build(:atom, predicate: predicate, terms: terms) }.to raise_error ArgumentError
         end
       end
 

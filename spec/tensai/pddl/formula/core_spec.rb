@@ -4,8 +4,7 @@ require_relative '../../../spec_helper'
 
 module Tensai::Pddl
   RSpec.describe Formula::Formula do
-    let(:predicate) { Predicate.new('adjacent', variables: [Variable.new('a'), Variable.new('b')]) }
-    let(:formula) { Formula::Atom.new(predicate, 'a' => Entity.new('alice'), 'b' => Entity.new('bob')) }
+    let(:formula) { build(:atom) }
 
     describe '#not' do
       subject { formula.not }
@@ -21,8 +20,8 @@ module Tensai::Pddl
     end
 
     describe '#and' do
-      let(:formula_2) { Formula::Atom.new(predicate, 'a' => Entity.new('carl'), 'b' => Entity.new('deacon')) }
-      let(:formula_3) { Formula::Atom.new(predicate, 'a' => Entity.new('emma'), 'b' => Entity.new('fred')) }
+      let(:formula_2) { build(:atom) }
+      let(:formula_3) { build(:atom) }
 
       context 'two formulas' do
         subject { formula.and formula_2 }
