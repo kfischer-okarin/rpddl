@@ -12,21 +12,24 @@ module Tensai::Pddl
   module Action
     # STRIPS-style action
     class Strips
-      include Dry::Initializer.define -> do
-        param :name, type: DataTypes::Name
-        option :parameters, type: DataTypes::VariableList
-        option :precondition, type: DataTypes::InstanceOf(Formula::Formula), optional: true
-      end
+      extend Dry::Initializer
+
+      param :name, type: DataTypes::Name
+      option :parameters, type: DataTypes::VariableList
+      option :precondition, type: DataTypes::PositiveConjunction, optional: true
 
       def initialize(name, **options)
         super name, **options
-        validate_precondition if precondition
+
+        check_for_unknown_variables precondition if precondition
       end
 
       private
 
-      def validate_precondition
-        DataTypes::PositiveConjunction[precondition]
+      def check_for_unknown_variables(formula)
+        unknown_variables = formula.variables.reject { |var| parameters.include? var }
+
+        raise ArgumentError, "Unknown variables: #{unknown_variables}" if unknown_variables.any?
       end
     end
   end

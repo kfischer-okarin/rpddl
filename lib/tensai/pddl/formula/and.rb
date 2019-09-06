@@ -19,6 +19,10 @@ module Tensai::Pddl
       def and(other)
         And.new(*formulas, other)
       end
+
+      def variables
+        formulas.map(&:variables).flatten
+      end
     end
   end
 end

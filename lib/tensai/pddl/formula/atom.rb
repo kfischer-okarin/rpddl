@@ -24,6 +24,10 @@ module Tensai::Pddl
         check_for_missing_terms
       end
 
+      def variables
+        terms.values.select { |term| term.is_a? Variable }
+      end
+
       private
 
       def check_for_unknown_terms

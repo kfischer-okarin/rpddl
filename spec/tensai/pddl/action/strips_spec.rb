@@ -18,35 +18,70 @@ module Tensai::Pddl
       end
 
       describe '#precondition' do
-        subject { Strips.new('action', parameters: [Variable.new('b')], precondition: precondition) }
+        subject { Strips.new('action', parameters: [parameter], precondition: precondition) }
 
-        VALID_PRECONDITIONS = [
-          FactoryBot.build(:atom),
-          FactoryBot.build(:atom).and(FactoryBot.build(:atom))
-        ].freeze
+        let(:parameter) { build(:variable) }
+        let(:predicate) { build(:predicate, :with_variable_names, variable_names: [:a]) }
 
-        VALID_PRECONDITIONS.each do |precondition|
-          context "with #{precondition}" do
-            let(:precondition) { precondition }
-
-            it 'does not raise error' do
-              expect(subject.precondition).to eq(precondition)
-            end
+        shared_examples 'value is accepted' do
+          it 'is accepted' do
+            expect { subject }.not_to raise_error
           end
         end
 
-        INVALID_PRECONDITIONS = [
-          FactoryBot.build(:atom).not,
-          FactoryBot.build(:atom).and(FactoryBot.build(:atom).not)
-        ].freeze
+        shared_examples 'value is not accepted' do
+          it 'is not accepted' do
+            expect { subject }.to raise_error ArgumentError
+          end
+        end
 
-        INVALID_PRECONDITIONS.each do |precondition|
-          context "with #{precondition}" do
-            let(:precondition) { precondition }
+        context 'atom' do
+          let(:precondition) { build(:atom, predicate: predicate, terms: { a: term }) }
 
-            it 'raises an error ArgumentError' do
-              expect { subject.precondition }.to raise_error Dry::Types::ConstraintError
-            end
+          context 'containing entity' do
+            let(:term) { build(:entity) }
+
+            include_examples 'value is accepted'
+          end
+
+          context 'containing parameter variable' do
+            let(:term) { parameter }
+
+            include_examples 'value is accepted'
+          end
+
+          context 'containing an unknown variable' do
+            let(:term) { build(:variable) }
+
+            include_examples 'value is not accepted'
+          end
+        end
+
+        context 'conjunction' do
+          let(:precondition) {
+            Formula::And.new(
+              build(:atom, predicate: predicate, terms: { a: build(:entity) }),
+              build(:atom, predicate: predicate, terms: { a: parameter }),
+              build(:atom, predicate: predicate, terms: { a: term }),
+            )
+          }
+
+          context 'containing entity' do
+            let(:term) { build(:entity) }
+
+            include_examples 'value is accepted'
+          end
+
+          context 'containing parameter variable' do
+            let(:term) { parameter }
+
+            include_examples 'value is accepted'
+          end
+
+          context 'containing an unknown variable' do
+            let(:term) { build(:variable) }
+
+            include_examples 'value is not accepted'
           end
         end
       end
