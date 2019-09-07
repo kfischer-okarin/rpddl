@@ -2,11 +2,9 @@
 
 require 'dry-initializer'
 
-require 'tensai/pddl/formula'
 require 'tensai/pddl/data_types'
-require 'tensai/pddl/data_types/positive_conjunction'
+require 'tensai/pddl/data_types/conjunction'
 require 'tensai/pddl/data_types/variable_list'
-require 'tensai/pddl/variable'
 
 module Tensai::Pddl
   module Action

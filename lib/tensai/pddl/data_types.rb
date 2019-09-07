@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require 'dry-types'
-
 require 'tensai/pddl/data_types/base'
-require 'tensai/pddl/data_structures'
 
 # rubocop:disable Naming/MethodName
 module Tensai::Pddl

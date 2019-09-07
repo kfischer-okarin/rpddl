@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'dry-types'
-
 require 'tensai/pddl/entity'
 require 'tensai/pddl/variable'
 
