@@ -7,12 +7,15 @@ require 'tensai/pddl/formula/atom'
 module Tensai::Pddl
   module DataTypes
     PositiveConjunction = InstanceOf(Formula::Atom) |
-                          InstanceOf(Formula::And) do |conjunction|
-                            conjunction.formulas.each { |f| InstanceOf(Formula::Atom)[f] }
-                          end
+                          InstanceOf(Formula::And)
+                          .constrained(fulfills: ->(conjunction) {
+                            conjunction.formulas.all? { |f| f.is_a? Formula::Atom }
+                          })
+
     Conjunction = Literal |
-                  InstanceOf(Formula::And) do |conjunction|
-                    conjunction.formulas.each { |f| Literal[f] }
-                  end
+                  InstanceOf(Formula::And)
+                  .constrained(fulfills: ->(conjunction) {
+                    conjunction.formulas.all? { |f| Literal.valid? f }
+                  })
   end
 end

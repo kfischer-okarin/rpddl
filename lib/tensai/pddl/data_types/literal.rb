@@ -6,8 +6,7 @@ require 'tensai/pddl/formula/negated'
 module Tensai::Pddl
   module DataTypes
     Literal = InstanceOf(Formula::Atom) |
-              InstanceOf(Formula::Negated) do |negated_formula|
-                InstanceOf(Formula::Atom)[negated_formula.formula]
-              end
+              InstanceOf(Formula::Negated)
+              .constrained(fulfills: ->(negated) { negated.formula.is_a? Formula::Atom })
   end
 end

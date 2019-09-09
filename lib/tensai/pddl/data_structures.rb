@@ -21,7 +21,7 @@ module Tensai::Pddl
       param :type, type: DataTypes::Base::Instance(Class)
     end
 
-    def_delegators :elements, :keys, :key?, :[]
+    def_delegators :elements, :keys, :key?, :[], :empty?
 
     def each
       elements.values.each { |el| yield el }

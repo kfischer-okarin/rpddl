@@ -13,13 +13,7 @@ module Tensai::Pddl
     module_function
 
     def InstanceOf(type)
-      Base::Instance(type).constructor(->(instance) {
-        if block_given?
-          Base::Instance(type)[instance]
-          yield instance
-        end
-        instance
-      })
+      Base::Instance(type)
     end
 
     def FilledArrayOf(type)
@@ -29,3 +23,7 @@ module Tensai::Pddl
   end
 end
 # rubocop:enable Naming/MethodName
+
+Dry::Logic::Predicates.predicate('fulfills?') do |condition, input|
+  condition.call(input)
+end

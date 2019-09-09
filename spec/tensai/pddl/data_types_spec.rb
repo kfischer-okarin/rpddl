@@ -25,6 +25,14 @@ module Tensai::Pddl
       include_examples 'it does not accept', FactoryBot.build(:variable)
     end
 
+    describe '::Literal' do
+      subject { DataTypes::Literal }
+
+      include_examples 'it accepts', FactoryBot.build(:atom)
+      include_examples 'it accepts', FactoryBot.build(:atom).not
+      include_examples 'it does not accept', 'abc'
+    end
+
     describe '::PositiveConjunction' do
       subject { DataTypes::PositiveConjunction }
 
@@ -32,6 +40,17 @@ module Tensai::Pddl
       include_examples 'it accepts', FactoryBot.build(:atom).and(FactoryBot.build(:atom))
       include_examples 'it does not accept', FactoryBot.build(:atom).not
       include_examples 'it does not accept', FactoryBot.build(:atom).and(FactoryBot.build(:atom).not)
+      include_examples 'it does not accept', 'not a formula'
+    end
+
+    describe '::Conjunction' do
+      subject { DataTypes::Conjunction }
+
+      include_examples 'it accepts', FactoryBot.build(:atom)
+      include_examples 'it accepts', FactoryBot.build(:atom).and(FactoryBot.build(:atom))
+      include_examples 'it accepts', FactoryBot.build(:atom).not
+      include_examples 'it accepts', FactoryBot.build(:atom).and(FactoryBot.build(:atom).not)
+      include_examples 'it does not accept', FactoryBot.build(:atom).and(FactoryBot.build(:atom)).not
       include_examples 'it does not accept', 'not a formula'
     end
   end
