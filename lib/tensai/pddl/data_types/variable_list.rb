@@ -5,8 +5,7 @@ require 'tensai/pddl/variable'
 
 module Tensai::Pddl
   module DataTypes
-    VariableList = InstanceOf(NamedList)
-                   .constructor(->(array) { NamedList.new(Variable, array) })
-                   .constrained(fulfills: ->(list) { !list.empty? })
+    VariableList = Base::Constructor(NamedList)
+                       .constrained(fulfills: ->(list) { !list.empty? })
   end
 end

@@ -2,23 +2,14 @@
 
 require 'forwardable'
 
-require 'dry-types'
-
-require 'tensai/pddl/data_types/base'
-
 module Tensai::Pddl
   # Typed collection of named elements
   class NamedList
     extend Forwardable
     include Enumerable
 
-    def initialize(type, elements)
-      @type = DataTypes::Base.Instance(type)
+    def initialize(elements)
       elements.each { |el| add el }
-    end
-
-    include Dry::Initializer.define -> do
-      param :type, type: DataTypes::Base::Instance(Class)
     end
 
     def_delegators :elements, :keys, :key?, :[], :empty?
@@ -32,7 +23,6 @@ module Tensai::Pddl
     attr_accessor :type
 
     def add(added)
-      type[added]
       raise "Element named '#{added.name}' already contained" if elements.key? added.name
 
       elements[added.name] = added
