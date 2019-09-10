@@ -15,11 +15,13 @@ module Tensai::Pddl
       param :name, type: DataTypes::Name
       option :parameters, type: DataTypes::VariableList
       option :precondition, type: DataTypes::PositiveConjunction, optional: true
+      option :effect, type: DataTypes::Conjunction
 
       def initialize(name, **options)
         super name, **options
 
         check_for_unknown_variables precondition if precondition
+        check_for_unknown_variables effect
       end
 
       private

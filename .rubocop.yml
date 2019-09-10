@@ -4,6 +4,10 @@ Style/Lambda:
 Metrics/LineLength:
   Max: 136
 
+Metrics/ModuleLength:
+  Exclude:
+    - spec/**/*
+
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
