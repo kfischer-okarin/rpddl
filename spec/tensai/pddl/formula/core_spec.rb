@@ -82,5 +82,16 @@ module Tensai::Pddl
         end
       end
     end
+
+    describe '#implies' do
+      let(:formula_2) { build(:atom) }
+
+      subject { formula.implies formula_2 }
+
+      it 'returns not a or b' do
+        expect(subject).to be_a Formula::Or
+        expect(subject.formulas).to contain_exactly(formula.not, formula_2)
+      end
+    end
   end
 end

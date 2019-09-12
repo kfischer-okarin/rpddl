@@ -20,6 +20,10 @@ module Tensai::Pddl
         Negated.new self
       end
 
+      def implies(other)
+        self.not.or other
+      end
+
       private
 
       def initialize; end
