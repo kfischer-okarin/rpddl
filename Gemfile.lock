@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     tensai-pddl (0.1.0)
+      dry-equalizer (~> 0.2)
       dry-initializer (~> 3.0)
       dry-types (~> 1.1)
 
