@@ -2,7 +2,6 @@
 
 require 'dry-initializer'
 
-require 'tensai/pddl/data_types'
 require 'tensai/pddl/data_types/terms'
 require 'tensai/pddl/formula/core'
 require 'tensai/pddl/predicate'

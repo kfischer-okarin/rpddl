@@ -50,5 +50,37 @@ module Tensai::Pddl
         end
       end
     end
+
+    describe '#or' do
+      let(:formula_2) { build(:atom) }
+      let(:formula_3) { build(:atom) }
+
+      context 'two formulas' do
+        subject { formula.or formula_2 }
+
+        it 'returns a and conjunction of both formulas' do
+          expect(subject).to be_a Formula::Or
+          expect(subject.formulas).to contain_exactly(formula, formula_2)
+        end
+      end
+
+      context 'a conjunction and a formula' do
+        subject { formula.or(formula_2).or(formula_3) }
+
+        it 'returns a and conjunction of all formulas' do
+          expect(subject).to be_a Formula::Or
+          expect(subject.formulas).to contain_exactly(formula, formula_2, formula_3)
+        end
+      end
+
+      context 'a formula and a conjunction' do
+        subject { formula.or formula_2.or(formula_3) }
+
+        it 'returns a and conjunction of all formulas' do
+          expect(subject).to be_a Formula::Or
+          expect(subject.formulas).to contain_exactly(formula, formula_2, formula_3)
+        end
+      end
+    end
   end
 end

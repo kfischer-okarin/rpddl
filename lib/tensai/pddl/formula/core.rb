@@ -10,6 +10,12 @@ module Tensai::Pddl
         And.new(self, other)
       end
 
+      def or(other)
+        return other.or self if other.is_a? Or
+
+        Or.new(self, other)
+      end
+
       def not
         Negated.new self
       end

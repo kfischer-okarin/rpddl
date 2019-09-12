@@ -3,6 +3,7 @@
 require 'tensai/pddl/action'
 require 'tensai/pddl/domain'
 require 'tensai/pddl/entity'
+require 'tensai/pddl/formula'
 require 'tensai/pddl/predicate'
 require 'tensai/pddl/variable'
 require 'tensai/pddl/version'

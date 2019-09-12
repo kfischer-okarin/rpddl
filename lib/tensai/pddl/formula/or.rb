@@ -4,8 +4,8 @@ require 'dry-initializer'
 
 module Tensai::Pddl
   module Formula
-    # Conjunction
-    class And < Formula
+    # Disjunction
+    class Or < Formula
       include Dry::Initializer.define -> do
         param :formulas, type: DataTypes::FilledArrayOf(Formula)
       end
@@ -14,8 +14,8 @@ module Tensai::Pddl
         super(formulas)
       end
 
-      def and(other)
-        And.new(*formulas, other)
+      def or(other)
+        Or.new(*formulas, other)
       end
 
       def variables

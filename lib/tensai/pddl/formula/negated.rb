@@ -2,8 +2,6 @@
 
 require 'dry-initializer'
 
-require 'tensai/pddl/data_types'
-
 module Tensai::Pddl
   module Formula
     # Negated formula
