@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'set'
+
 require 'tensai/pddl/data_types/base'
 
 # rubocop:disable Naming/MethodName
@@ -16,9 +18,10 @@ module Tensai::Pddl
       Base::Instance(type)
     end
 
-    def FilledArrayOf(type)
-      Base::Array.of(InstanceOf(type))
-                 .constrained(filled: true)
+    def FilledSetOf(type)
+      Base::Constructor(Set)
+          .constrained(filled: true)
+          .constrained(fulfills: ->(elements) { elements.all? { |e| e.is_a? type } })
     end
   end
 end

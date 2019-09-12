@@ -53,5 +53,14 @@ module Tensai::Pddl
       include_examples 'it does not accept', FactoryBot.build(:atom).and(FactoryBot.build(:atom)).not
       include_examples 'it does not accept', 'not a formula'
     end
+
+    describe '::FilledSetOf(string)' do
+      subject { DataTypes::FilledSetOf(String) }
+
+      include_examples 'it accepts', ['a']
+      include_examples 'it accepts', Set.new(%w[a b])
+      include_examples 'it does not accept', [4]
+      include_examples 'it does not accept', 22
+    end
   end
 end
