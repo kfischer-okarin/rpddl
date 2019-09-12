@@ -5,7 +5,7 @@ require_relative '../../../spec_helper'
 module Tensai::Pddl
   RSpec.describe Formula::Atom do
     describe '#terms' do
-      let(:predicate) { build(:predicate, variables: [Variable.new('a'), Variable.new('b')]) }
+      let(:predicate) { build(:predicate, :with_variable_names, variable_names: %w[a b]) }
 
       shared_examples 'it accepts' do |terms|
         it "accepts #{terms}" do
@@ -24,6 +24,18 @@ module Tensai::Pddl
       include_examples 'it accepts', 'a' => Entity.new('robot_a'), 'b' => Variable.new('neighbor')
       include_examples 'it does not accept', 'a' => Entity.new('dock1')
       include_examples 'it does not accept', 'c' => Variable.new('left')
+    end
+
+    describe '#variables' do
+      subject { atom.variables }
+
+      let(:atom) { build(:atom, predicate: predicate, terms: terms) }
+      let(:predicate) { build(:predicate, :with_variable_names, variable_names: %w[a b]) }
+      let(:terms) { { a: build(:variable), b: build(:entity) } }
+
+      it 'contains all variables' do
+        expect(subject).to contain_exactly(terms[:a])
+      end
     end
   end
 end

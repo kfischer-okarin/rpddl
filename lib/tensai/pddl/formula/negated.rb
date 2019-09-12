@@ -15,6 +15,10 @@ module Tensai::Pddl
       def not
         formula
       end
+
+      def variables
+        formula.variables
+      end
     end
   end
 end
