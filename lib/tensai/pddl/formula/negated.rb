@@ -16,8 +16,8 @@ module Tensai::Pddl
         formula
       end
 
-      def variables
-        formula.variables
+      def free_variables
+        formula.free_variables
       end
     end
   end

@@ -26,8 +26,8 @@ module Tensai::Pddl
       include_examples 'it does not accept', 'c' => Variable.new('left')
     end
 
-    describe '#variables' do
-      subject { atom.variables }
+    describe '#free_variables' do
+      subject { atom.free_variables }
 
       let(:atom) { build(:atom, predicate: predicate, terms: terms) }
       let(:predicate) { build(:predicate, :with_variable_names, variable_names: %w[a b]) }

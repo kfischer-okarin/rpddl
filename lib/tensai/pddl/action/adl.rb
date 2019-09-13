@@ -27,7 +27,7 @@ module Tensai::Pddl
       private
 
       def check_for_unknown_variables(formula)
-        unknown_variables = formula.variables.reject { |var| parameters.include? var }
+        unknown_variables = formula.free_variables.reject { |var| parameters.include? var }
 
         raise ArgumentError, "Unknown variables: #{unknown_variables}" if unknown_variables.any?
       end

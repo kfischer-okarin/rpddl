@@ -20,8 +20,8 @@ module Tensai::Pddl
         And.new(*formulas, other)
       end
 
-      def variables
-        formulas.map(&:variables).flatten
+      def free_variables
+        formulas.map(&:free_variables).flatten
       end
     end
   end

@@ -4,8 +4,8 @@ require_relative '../../../spec_helper'
 
 module Tensai::Pddl
   RSpec.describe Formula::Negated do
-    describe '#variables' do
-      subject { formula.variables }
+    describe '#free_variables' do
+      subject { formula.free_variables }
 
       let(:formula) { build(:atom, predicate: predicate, terms: terms).not }
       let(:predicate) { build(:predicate, :with_variable_names, variable_names: %w[a b]) }
