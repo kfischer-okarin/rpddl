@@ -61,4 +61,29 @@ module Tensai::Pddl
       end
     end
   end
+
+  RSpec.shared_examples 'a formula with bound variables' do
+    let(:variables) { [build(:variable)] }
+    let(:predicate) { build(:predicate, :with_variable_names, variable_names: %w[a b]) }
+
+    context 'when not using the bound variables' do
+      let(:formula) {
+        build(:atom, predicate: predicate, terms: { a: build(:entity), b: build(:entity) })
+      }
+
+      it 'raises an ArgumentError' do
+        expect { subject }.to raise_error ArgumentError
+      end
+    end
+
+    describe '#free_variables' do
+      let(:formula) {
+        build(:atom, predicate: predicate, terms: { a: variables[0], b: build(:variable) })
+      }
+
+      it 'contains all free variables' do
+        expect(subject.free_variables).to contain_exactly(formula.terms['b'])
+      end
+    end
+  end
 end

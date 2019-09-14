@@ -3,6 +3,8 @@
 require 'dry-equalizer'
 require 'dry-initializer'
 
+require 'tensai/pddl/data_types/variable_list'
+
 module Tensai::Pddl
   module Formula
     # Formula
@@ -45,6 +47,33 @@ module Tensai::Pddl
 
       def free_variables
         formulas.map(&:free_variables).flatten
+      end
+    end
+
+    # Formula with bound variables
+    class WithBoundVariables < Formula
+      include Dry::Equalizer(:variables, :formula)
+      extend Dry::Initializer
+
+      param :variables, type: DataTypes::VariableList
+      param :formula, type: DataTypes::InstanceOf(Formula)
+
+      def initialize(variables, formula)
+        super variables, formula
+
+        check_bound_variables_used
+      end
+
+      def free_variables
+        formula.free_variables.reject { |v| variables.include? v }
+      end
+
+      private
+
+      def check_bound_variables_used
+        unused_bound_variables = variables.reject { |v| formula.free_variables.include? v }
+
+        raise ArgumentError, "Unused bound variables #{unused_bound_variables}" if unused_bound_variables.any?
       end
     end
   end
