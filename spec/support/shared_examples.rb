@@ -44,4 +44,21 @@ module Tensai::Pddl
       end
     end
   end
+
+  RSpec.shared_examples 'a set of formulas' do
+    describe '#free_variables' do
+      let(:formulas) {
+        [
+          build(:atom, predicate: predicate, terms: { a: build(:variable), b: build(:entity) }),
+          build(:atom, predicate: predicate, terms: { a: build(:entity), b: build(:variable) })
+        ]
+      }
+
+      let(:predicate) { build(:predicate, :with_variable_names, variable_names: %w[a b]) }
+
+      it 'contains all variables' do
+        expect(subject.free_variables).to contain_exactly(formulas[0].terms['a'], formulas[1].terms['b'])
+      end
+    end
+  end
 end
