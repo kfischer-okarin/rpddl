@@ -7,7 +7,6 @@ module Tensai::Pddl
     # STRIPS-style action
     class Strips < Adl
       option :precondition, type: DataTypes::PositiveConjunction, optional: true
-      option :effect, type: DataTypes::Conjunction
     end
   end
 end

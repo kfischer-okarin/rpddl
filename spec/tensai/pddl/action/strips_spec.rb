@@ -6,13 +6,13 @@ module Tensai::Pddl
   module Action
     RSpec.describe Strips do
       describe '#name' do
-        subject { Strips.new(name, parameters: build_list(:variable, 1), effect: build(:atom)) }
+        subject { Strips.new(name, parameters: build_list(:variable, 1), effects: [build(:effect)]) }
 
         it_behaves_like 'a named object'
       end
 
       describe '#parameters' do
-        subject { Strips.new('action', parameters: variables, effect: build(:atom)) }
+        subject { Strips.new('action', parameters: variables, effects: [build(:effect)]) }
 
         it_behaves_like 'a object containing variables', :parameters
       end
@@ -50,7 +50,7 @@ module Tensai::Pddl
       end
 
       describe '#precondition' do
-        subject { Strips.new('action', parameters: [parameter], precondition: precondition, effect: build(:atom)) }
+        subject { Strips.new('action', parameters: [parameter], precondition: precondition, effects: [build(:effect)]) }
 
         let(:parameter) { build(:variable) }
         let(:predicate) { build(:predicate, :with_variable_names, variable_names: [:a]) }
@@ -75,24 +75,28 @@ module Tensai::Pddl
       end
 
       describe '#effect' do
-        subject { Strips.new('action', parameters: [parameter], effect: effect) }
+        subject { Strips.new('action', parameters: [parameter], effects: effects) }
 
         let(:parameter) { build(:variable) }
         let(:predicate) { build(:predicate, :with_variable_names, variable_names: [:a]) }
 
-        context 'atom' do
-          let(:effect) { build(:atom, predicate: predicate, terms: { a: term }) }
+        context 'single atomic effect' do
+          let(:effects) {
+            [
+              build(:effect, formula: build(:atom, predicate: predicate, terms: { a: term }))
+            ]
+          }
 
           include_examples 'accepts entities and known variables'
         end
 
-        context 'conjunction' do
-          let(:effect) {
-            Formula::And.new(
-              build(:atom, predicate: predicate, terms: { a: build(:entity) }),
-              build(:atom, predicate: predicate, terms: { a: parameter }),
-              build(:atom, predicate: predicate, terms: { a: term })
-            )
+        context 'multiple effects' do
+          let(:effects) {
+            [
+              build(:effect, formula: build(:atom, predicate: predicate, terms: { a: build(:entity) })),
+              build(:effect, formula: build(:atom, predicate: predicate, terms: { a: parameter })),
+              build(:effect, formula: build(:atom, predicate: predicate, terms: { a: term }))
+            ]
           }
 
           include_examples 'accepts entities and known variables'

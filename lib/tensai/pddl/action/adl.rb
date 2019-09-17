@@ -15,13 +15,13 @@ module Tensai::Pddl
       param :name, type: DataTypes::Name
       option :parameters, type: DataTypes::VariableList
       option :precondition, type: DataTypes::InstanceOf(Formula::Formula), optional: true
-      option :effect, type: DataTypes::InstanceOf(Formula::Formula)
+      option :effects, type: DataTypes::FilledSetOf(Action::Effect)
 
       def initialize(name, **options)
         super name, **options
 
         check_for_unknown_variables precondition if precondition
-        check_for_unknown_variables effect
+        effects.each { |e| check_for_unknown_variables e.formula }
       end
 
       private
