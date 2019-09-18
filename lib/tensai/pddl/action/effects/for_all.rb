@@ -2,7 +2,6 @@
 
 require 'dry-initializer'
 
-require 'tensai/pddl/data_types/literal'
 require 'tensai/pddl/data_types/variable_list'
 
 module Tensai::Pddl

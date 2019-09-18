@@ -2,7 +2,7 @@
 
 require 'dry-initializer'
 
-require 'tensai/pddl/data_types/literal'
+require 'tensai/pddl/data_types/conjunction'
 
 module Tensai::Pddl
   module Action
@@ -10,7 +10,7 @@ module Tensai::Pddl
       # Atomic effect
       class Atom < Effect
         include Dry::Initializer.define -> do
-          param :formula, type: DataTypes::Literal
+          param :formula, type: DataTypes::Conjunction
         end
 
         def free_variables
