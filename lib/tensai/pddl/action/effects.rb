@@ -8,4 +8,5 @@ module Tensai::Pddl
 end
 
 require 'tensai/pddl/action/effects/atom'
+require 'tensai/pddl/action/effects/conditional'
 require 'tensai/pddl/action/effects/for_all'
