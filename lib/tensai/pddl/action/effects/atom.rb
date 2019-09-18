@@ -12,6 +12,10 @@ module Tensai::Pddl
         include Dry::Initializer.define -> do
           param :formula, type: DataTypes::Literal
         end
+
+        def free_variables
+          formula.free_variables
+        end
       end
     end
   end

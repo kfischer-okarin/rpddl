@@ -21,7 +21,7 @@ module Tensai::Pddl
         super name, **options
 
         check_for_unknown_variables precondition if precondition
-        effects.each { |e| check_for_unknown_variables e.formula }
+        effects.each { |e| check_for_unknown_variables e }
       end
 
       private
