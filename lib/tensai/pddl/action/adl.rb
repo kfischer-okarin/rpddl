@@ -15,7 +15,7 @@ module Tensai::Pddl
       param :name, type: DataTypes::Name
       option :parameters, type: DataTypes::VariableList
       option :precondition, type: DataTypes::InstanceOf(Formula::Formula), optional: true
-      option :effects, type: DataTypes::FilledSetOf(Action::Effect)
+      option :effects, type: DataTypes::FilledSetOf(Effect)
 
       def initialize(name, **options)
         super name, **options

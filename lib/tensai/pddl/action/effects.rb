@@ -3,6 +3,8 @@
 module Tensai::Pddl
   module Action
     # Action effect
-    class Effect; end
+    module Effects; end
   end
 end
+
+require 'tensai/pddl/action/effects/atom'
