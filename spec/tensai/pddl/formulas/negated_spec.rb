@@ -3,7 +3,7 @@
 require_relative '../../../spec_helper'
 
 module Tensai::Pddl
-  RSpec.describe Formula::Negated do
+  RSpec.describe Formulas::Negated do
     describe '#free_variables' do
       subject { formula.free_variables }
 

@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 require 'tensai/pddl/data_types/literal'
-require 'tensai/pddl/formula/and'
-require 'tensai/pddl/formula/atom'
+require 'tensai/pddl/formulas/and'
+require 'tensai/pddl/formulas/atom'
 
 module Tensai::Pddl
   module DataTypes
-    PositiveConjunction = InstanceOf(Formula::Atom) |
-                          InstanceOf(Formula::And)
+    PositiveConjunction = InstanceOf(Formulas::Atom) |
+                          InstanceOf(Formulas::And)
                           .constrained(fulfills: ->(conjunction) {
-                            conjunction.formulas.all? { |f| f.is_a? Formula::Atom }
+                            conjunction.formulas.all? { |f| f.is_a? Formulas::Atom }
                           })
 
     Conjunction = Literal |
-                  InstanceOf(Formula::And)
+                  InstanceOf(Formulas::And)
                   .constrained(fulfills: ->(conjunction) {
                     conjunction.formulas.all? { |f| Literal.valid? f }
                   })

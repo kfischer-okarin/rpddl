@@ -63,7 +63,7 @@ module Tensai::Pddl
 
         context 'conjunction' do
           let(:precondition) {
-            Formula::And.new(
+            Formulas::And.new(
               build(:atom, predicate: predicate, terms: { a: build(:entity) }),
               build(:atom, predicate: predicate, terms: { a: parameter }),
               build(:atom, predicate: predicate, terms: { a: term })

@@ -4,11 +4,10 @@ require 'dry-equalizer'
 require 'dry-initializer'
 
 require 'tensai/pddl/data_types/terms'
-require 'tensai/pddl/formula/core'
 require 'tensai/pddl/predicate'
 
 module Tensai::Pddl
-  module Formula
+  module Formulas
     # Atomic formula in a planning domain
     class Atom < Formula
       include Dry::Equalizer(:predicate, :terms)

@@ -4,7 +4,7 @@ require 'dry-equalizer'
 require 'dry-initializer'
 
 module Tensai::Pddl
-  module Formula
+  module Formulas
     # Negated formula
     class Negated < Formula
       include Dry::Equalizer(:formula)
@@ -19,6 +19,13 @@ module Tensai::Pddl
       def free_variables
         formula.free_variables
       end
+    end
+  end
+
+  # Formula extension
+  class Formula
+    def not
+      Formulas::Negated.new self
     end
   end
 end

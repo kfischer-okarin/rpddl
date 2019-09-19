@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'tensai/pddl/formula/atom'
-require 'tensai/pddl/formula/negated'
+require 'tensai/pddl/formulas/atom'
+require 'tensai/pddl/formulas/negated'
 
 module Tensai::Pddl
   module DataTypes
-    Literal = InstanceOf(Formula::Atom) |
-              InstanceOf(Formula::Negated)
-              .constrained(fulfills: ->(negated) { negated.formula.is_a? Formula::Atom })
+    Literal = InstanceOf(Formulas::Atom) |
+              InstanceOf(Formulas::Negated)
+              .constrained(fulfills: ->(negated) { negated.formula.is_a? Formulas::Atom })
   end
 end

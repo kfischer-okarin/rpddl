@@ -3,9 +3,9 @@
 require_relative '../../../spec_helper'
 
 module Tensai::Pddl
-  RSpec.describe Formula::Or do
+  RSpec.describe Formulas::And do
     it_behaves_like 'a set of formulas' do
-      subject { Formula::Or.new(*formulas) }
+      subject { Formulas::And.new(*formulas) }
     end
   end
 end

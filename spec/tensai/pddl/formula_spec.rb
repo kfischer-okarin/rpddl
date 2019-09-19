@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative '../../../spec_helper'
+require_relative '../../spec_helper'
 
 module Tensai::Pddl
-  RSpec.describe Formula::Formula do
+  RSpec.describe Formula do
     let(:formula) { build(:atom) }
 
     describe '#not' do
       subject { formula.not }
 
       it 'returns a negated formula' do
-        expect(subject).to be_a Formula::Negated
+        expect(subject).to be_a Formulas::Negated
         expect(subject.formula).to equal formula
       end
 
@@ -27,7 +27,7 @@ module Tensai::Pddl
         subject { formula.and formula_2 }
 
         it 'returns a and conjunction of both formulas' do
-          expect(subject).to be_a Formula::And
+          expect(subject).to be_a Formulas::And
           expect(subject.formulas).to contain_exactly(formula, formula_2)
         end
       end
@@ -36,7 +36,7 @@ module Tensai::Pddl
         subject { formula.and(formula_2).and(formula_3) }
 
         it 'returns a and conjunction of all formulas' do
-          expect(subject).to be_a Formula::And
+          expect(subject).to be_a Formulas::And
           expect(subject.formulas).to contain_exactly(formula, formula_2, formula_3)
         end
       end
@@ -45,7 +45,7 @@ module Tensai::Pddl
         subject { formula.and formula_2.and(formula_3) }
 
         it 'returns a and conjunction of all formulas' do
-          expect(subject).to be_a Formula::And
+          expect(subject).to be_a Formulas::And
           expect(subject.formulas).to contain_exactly(formula, formula_2, formula_3)
         end
       end
@@ -59,7 +59,7 @@ module Tensai::Pddl
         subject { formula.or formula_2 }
 
         it 'returns a and conjunction of both formulas' do
-          expect(subject).to be_a Formula::Or
+          expect(subject).to be_a Formulas::Or
           expect(subject.formulas).to contain_exactly(formula, formula_2)
         end
       end
@@ -68,7 +68,7 @@ module Tensai::Pddl
         subject { formula.or(formula_2).or(formula_3) }
 
         it 'returns a and conjunction of all formulas' do
-          expect(subject).to be_a Formula::Or
+          expect(subject).to be_a Formulas::Or
           expect(subject.formulas).to contain_exactly(formula, formula_2, formula_3)
         end
       end
@@ -77,7 +77,7 @@ module Tensai::Pddl
         subject { formula.or formula_2.or(formula_3) }
 
         it 'returns a and conjunction of all formulas' do
-          expect(subject).to be_a Formula::Or
+          expect(subject).to be_a Formulas::Or
           expect(subject.formulas).to contain_exactly(formula, formula_2, formula_3)
         end
       end
@@ -89,7 +89,7 @@ module Tensai::Pddl
       subject { formula.implies formula_2 }
 
       it 'returns not a or b' do
-        expect(subject).to be_a Formula::Or
+        expect(subject).to be_a Formulas::Or
         expect(subject.formulas).to contain_exactly(formula.not, formula_2)
       end
     end

@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
-require 'tensai/pddl/formula/core'
-require 'tensai/pddl/formula/and'
-require 'tensai/pddl/formula/atom'
-require 'tensai/pddl/formula/for_all'
-require 'tensai/pddl/formula/negated'
-require 'tensai/pddl/formula/or'
-require 'tensai/pddl/formula/there_exists'
+require 'tensai/pddl/data_types/variable_list'
 
 module Tensai::Pddl
-  module Formula; end
+  # Formula
+  class Formula
+    def implies(other)
+      self.not.or other
+    end
+
+    private
+
+    def initialize; end
+  end
 end

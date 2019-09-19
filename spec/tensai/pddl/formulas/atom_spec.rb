@@ -3,7 +3,7 @@
 require_relative '../../../spec_helper'
 
 module Tensai::Pddl
-  RSpec.describe Formula::Atom do
+  RSpec.describe Formulas::Atom do
     describe '#terms' do
       let(:predicate) { build(:predicate, :with_variable_names, variable_names: %w[a b]) }
 

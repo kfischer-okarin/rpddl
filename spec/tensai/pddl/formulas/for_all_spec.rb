@@ -3,8 +3,8 @@
 require_relative '../../../spec_helper'
 
 module Tensai::Pddl
-  RSpec.describe Formula::ForAll do
-    subject { Formula::ForAll.new(variables, formula) }
+  RSpec.describe Formulas::ForAll do
+    subject { Formulas::ForAll.new(variables, formula) }
 
     it_behaves_like 'a formula with bound variables'
   end
